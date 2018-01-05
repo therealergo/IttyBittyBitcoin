@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class IttyBittyBitcoinCommandLine {
-	/** Convert the given String into a boolean, throwing an error if the String is not in the right form. */
+	/** Convert the given String into a boolean, throwing an error if the String is not in the right form to be converted. */
 	private static boolean decodeBoolean(String value) {
 		if (value.equals("true") || value.equals("True") || value.equals("TRUE") || value.equals("1")) {
 			return true;
