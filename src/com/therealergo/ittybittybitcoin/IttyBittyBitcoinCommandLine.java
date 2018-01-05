@@ -22,8 +22,7 @@
 
 package com.therealergo.ittybittybitcoin;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,7 +39,7 @@ public class IttyBittyBitcoinCommandLine {
 	}
 	
 	/** Entry point for command-line mode of IttyBittyBitcoin. */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		// Initialize variables for interactive mode, and enter interactive mode loop
 		boolean interactiveMode = false;
 		boolean startup = true;
@@ -82,9 +81,11 @@ public class IttyBittyBitcoinCommandLine {
 						System.out.println("Generated key's address: " + IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.privateKeyToAddress(privateKey, decodeBoolean(args[2]))));
 					} else if (args.length == 4 && (args[0].equals("generateFromStringSHA256") || args[0].equals("gS"))) {
 						System.out.println("Generating keyset from SHA-256 hashed String...");
-						byte[] privateKey = IttyBittyBitcoin.hashSHA256(args[1].replace("\\n", "\n").replace("\\t", "\t").replace("\\s", " ").replace("\\\\", "\\").getBytes(args[2]));
-						System.out.println("Generated private key: " + IttyBittyBitcoin.encodeHex(privateKey));
-						System.out.println("Generated key's address: " + IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.privateKeyToAddress(privateKey, decodeBoolean(args[3]))));
+						try {
+							byte[] privateKey = IttyBittyBitcoin.hashSHA256(args[1].replace("\\n", "\n").replace("\\t", "\t").replace("\\s", " ").replace("\\\\", "\\").getBytes(args[2]));
+							System.out.println("Generated private key: " + IttyBittyBitcoin.encodeHex(privateKey));
+							System.out.println("Generated key's address: " + IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.privateKeyToAddress(privateKey, decodeBoolean(args[3]))));
+						} catch (UnsupportedEncodingException e) { throw new RuntimeException("Unsupported Encoding!", e); }
 					} else if (args.length == 3 && (args[0].equals("findVanityAddress") || args[0].equals("v"))) {
 						System.out.println("Searching for vanity address...");
 						byte[] privateVanity = IttyBittyBitcoin.findVanityAddress(args[1], decodeBoolean(args[2]));
