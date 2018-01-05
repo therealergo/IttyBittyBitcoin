@@ -1,7 +1,7 @@
 IttyBittyBitcoin
 ------------
 
-IttyBittyBitcoin is a set of well-documented free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line.
+IttyBittyBitcoin is a set of free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line. It is licensed under the MIT license
 
 Command reference
 ------------
@@ -63,7 +63,10 @@ Command reference
 
 <pre>['encodeHex'                or 'eH'] [a]</pre>  
 > Convert the given base-58 value to hexadecimal.  
-``[a]: Base-58     input`` Base-58 number to be converted to hexadecimal.  
+``[a]: Base-58     input`` Base-58 number to be converted to hexadecimal.   
+
+<pre>['version'                  or 'V' ]</pre>  
+> Print out the current IttyBittyBitcoin version number.
 
 <pre>['performTests'             or 't' ]</pre>  
 > Perform a series of tests to make sure that IttyBittyBitcoin is functioning properly.  
