@@ -98,18 +98,19 @@ public class IttyBittyBitcoinCommandLine {
 						System.out.println("Base-58 encoded value: " + IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.decodeHex(args[1])));
 					} else if (args.length == 2 && (args[0].equals("encodeHex") || args[0].equals("eH"))) {
 						System.out.println("Hexadecimal encoded value: " + IttyBittyBitcoin.encodeHex(IttyBittyBitcoin.decodeBase58(args[1])));
+					} else if (args.length == 1 && (args[0].equals("version") || args[0].equals("V"))) {
+						System.out.println("Current IttyBittyBitcoin version: V" + IttyBittyBitcoin.version + ".");
 					} else if (args.length == 1 && (args[0].equals("performTests") || args[0].equals("t"))) {
 						System.out.println(IttyBittyBitcoin.performTests());
 					} else if (args.length == 1 && (args[0].equals("interactiveMode") || args[0].equals("i"))) {
 						System.out.println(interactiveMode ? "Leaving interactive mode. Goodbye!" : "Entering interactive mode. Welcome!");
 						interactiveMode = !interactiveMode;
 					} else if (args.length == 1 && (args[0].equals("help") || args[0].equals("Help") || args[0].equals("?") || args[0].equals("/?") || args[0].equals("-?") || args[0].equals("h") || args[0].equals("H"))) {
-						System.out.println("IttyBittyBitcoin V" + IttyBittyBitcoin.version + "");
+						System.out.println("IttyBittyBitcoin");
 						System.out.println("------------");
-						System.out.println("Description: ");
-						System.out.println("	IttyBittyBitcoin is a set of well-documented free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line.");
-						System.out.println("------------");
+						System.out.println("	IttyBittyBitcoin is a set of free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line. It is MIT-licensed, and its only dependency is the BouncyCastle crypto library.");
 						System.out.println("Command reference: ");
+						System.out.println("------------");
 						System.out.println("['checksum'                 or 'c' ] <a>");
 						System.out.println("    <a>: Hexadecimal input: Value to compute checksum of.");
 						System.out.println("    Compute checksum of the given value, which is the last 4 bytes of the result of SHA-256 hashing the value twice.");
@@ -156,14 +157,16 @@ public class IttyBittyBitcoinCommandLine {
 						System.out.println("['encodeHex'                or 'eH'] <a>");
 						System.out.println("    <a>: Base-58     input: Base-58 number to be converted to hexadecimal.");
 						System.out.println("    Convert the given base-58 value to hexadecimal.");
+						System.out.println("['version'                  or 'V' ]");
+						System.out.println("    Print out the current IttyBittyBitcoin version number.");
 						System.out.println("['performTests'             or 't' ]");
 						System.out.println("    Perform a series of tests to make sure that IttyBittyBitcoin is functioning properly.");
 						System.out.println("['interactiveMode'          or 'i' ]");
 						System.out.println("    Toggle interactive mode, which allows IttyBittyBitcoin commands to be entered alone without retyping the path to the executable jar.");
 						System.out.println("['help'                     or '?' ]");
 						System.out.println("    Display this help screen.");
-						System.out.println("------------");
 						System.out.println("Notes: ");
+						System.out.println("------------");
 						System.out.println("    For every private key, both a compressed and uncompressed address can be generated. Those two addresses are completely different, with different balances. This exists because there are two ways of representing the public point. Early bitcoin software may not support the compressed addresses properly, but virtually all modern software will prefer the compressed addresses because of the smaller filesizes they create.");
 						System.out.println("    generateFromHash <...> is identical to privateKeyToPublicKey <...>, but both are maintained because they display the resulting output differently.");
 						System.out.println("    The amount of time a vanity address takes to generate depends on both the number of and type of characters in it. For example, '1' characters typically take much longer to find than others, while 'A' characters are typcially easier to find. ");
