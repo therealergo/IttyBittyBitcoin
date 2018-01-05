@@ -1,11 +1,16 @@
-IttyBittyBitcoin V1.0AR
+IttyBittyBitcoin
 ------------
-		IttyBittyBitcoin is a set of well-documented free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line.
+
+IttyBittyBitcoin is a set of well-documented free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line.
+
 Command reference
 ------------
-	['checksum'                 or 'c' ] [a]
-	    [a]: Hexadecimal input: Value to compute checksum of.
-	    Compute checksum of the given value, which is the last 4 bytes of the result of SHA-256 hashing the value twice.
+
+``['checksum'                 or 'c' ] [a]``  
+``    [a]: Hexadecimal input:`` Value to compute checksum of.  
+    Compute checksum of the given value, which is the last 4 bytes of the result of SHA-256 hashing the value twice.
+
+
 	['privateKeyToPublicPoint'  or 'kp'] [a] [b]
 	    [a]: Hexadecimal input: Private key.
 	    [b]: Boolean     input: Point compressed?
@@ -59,4 +64,4 @@ Notes
 ------------
 	    For every private key, both a compressed and uncompressed address can be generated. Those two addresses are completely different, with different balances. This exists because there are two ways of representing the public point. Early bitcoin software may not support the compressed addresses properly, but virtually all modern software will prefer the compressed addresses because of the smaller filesizes they create.
 	    generateFromHash [...] is identical to privateKeyToPublicKey [...], but both are maintained because they display the resulting output differently.
-	    The amount of time a vanity address takes to generate depends on both the number of and type of characters in it. For example, '1' characters typically take much longer to find than others, while 'A' characters are typcially easier to find. 
+	    The amount of time a vanity address takes to generate depends on both the number of and type of characters in it. For example, '1' characters typically take much longer to find than others, while 'A' characters are typcially easier to find.
