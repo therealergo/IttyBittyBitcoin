@@ -1,7 +1,7 @@
 IttyBittyBitcoin
 ------------
 
-IttyBittyBitcoin is a set of free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line. It is licensed under the MIT license
+IttyBittyBitcoin is a set of free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line.
 
 Command reference
 ------------
