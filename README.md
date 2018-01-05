@@ -1,10 +1,16 @@
 IttyBittyBitcoin V1.0AR: 
+
 	IttyBittyBitcoin is a set of well-documented free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line.
+
 ------------
 Command reference: 
+
 ['checksum'                 or 'c' ] [a]
+
     [a]: Hexadecimal input: Value to compute checksum of.
+    
     Compute checksum of the given value, which is the last 4 bytes of the result of SHA-256 hashing the value twice.
+    
 ['privateKeyToPublicPoint'  or 'kp'] [a] [b]
     [a]: Hexadecimal input: Private key.
     [b]: Boolean     input: Point compressed?
