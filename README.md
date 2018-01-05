@@ -1,7 +1,5 @@
 # IttyBittyBitcoin V1.0AR
-------------
-# Description
-	IttyBittyBitcoin is a set of free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line.
+    IttyBittyBitcoin is a set of free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line.  
 ------------
 # Command reference
 ['checksum'                 or 'c' ] <a>  
