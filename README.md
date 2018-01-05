@@ -15,51 +15,64 @@ Command reference
 ``[a]: Hexadecimal input`` Private key.  
 ``[b]: Boolean     input`` Point compressed?  
 
-['publicPointToPublicKey'   or 'pK'] [a]
-[a]: Hexadecimal input: Public point.
-Compute the SHA-256 hash followed by the RIME MD-160 hash of the given value, turning the given public point into a public key.
-['publicKeyToAddress'       or 'Ka'] [a]
-[a]: Hexadecimal input: Public key.
-Compute the address that is represented by the given public key. This is the number which, when encoded in base-58, is used to publicly identify this bitcoin wallet.
-['publicPointToAddress'     or 'pa'] [a]
-[a]: Hexadecimal input: Public point.
-Convenience function successively calling publicKeyToAddress [...] and publicPointToPublicKey [...]. See those for documentation.
-['privateKeyToPublicKey'    or 'kK'] [a] [b]
-[a]: Hexadecimal input: Private key.
-[b]: Boolean     input: Point compressed?
-Convenience function successively calling publicPointToPublicKey [...] and privateKeyToPublicPoint [...]. See those for documentation.
-['privateKeyToAddress'      or 'ka'] [a] [b]
-[a]: Hexadecimal input: Private key.
-[b]: Boolean     input: Point compressed?
-Convenience function successively calling publicKeyToAddress [...], publicPointToPublicKey [...], and privateKeyToPublicPoint [...]. See those for documentation.
-['generateRandom'           or 'gR'] [a]
-[a]: Boolean     input: Point compressed?
-Creates a new pseudorandomly-generated keypair.
-['generateFromHash'         or 'gH'] [a] [b]
-[a]: Hexadecimal input: Hash value, typically 256-bit.
-[b]: Boolean     input: Point compressed?
-Creates a keypair from the given hash value.
-['generateFromStringSHA256' or 'gS'] [a] [b] [c]
-[a]: String      input: String to be hashed. '\\s' will escape as a space character, '\\n' will escape as a newline character, and '\\t' will escape as a tab character. '\\\\' can be used to escape a backslash.
-[a]: String      input: Charset of string to be hashed. Typically one of 'US-ASCII' or 'UTF-8'.
-[c]: Boolean     input: Point compressed?
-Creates a keypair from the SHA-256 hash value of the given String.
-['findVanityAddress'        or 'v' ] [a] [b]
-[a]: Base-58     input: Vanity string to search for.
-[b]: Boolean     input: Point compressed?
-Find a vanity Bitcoin address, which will start with the given String. This is done probabilistically, and can take enormous amounts of time and CPU for longer vanity Strings.
-['encodeBase58'             or 'eB'] [a]
-[a]: Hexadecimal input: Hexadecimal number to be converted to base-58.
-Convert the given hexadecimal value to base-58.
-['encodeHex'                or 'eH'] [a]
-[a]: Base-58     input: Base-58 number to be converted to hexadecimal.
-Convert the given base-58 value to hexadecimal.
-['performTests'             or 't' ]
-Perform a series of tests to make sure that IttyBittyBitcoin is functioning properly.
-['interactiveMode'          or 'i' ]
-Toggle interactive mode, which allows IttyBittyBitcoin commands to be entered alone without retyping the path to the executable jar.
-['help'                     or '?' ]
-Display this help screen.
+``['publicPointToPublicKey'   or 'pK'] [a]``  
+> Compute the SHA-256 hash followed by the RIME MD-160 hash of the given value, turning the given public point into a public key.  
+``[a]: Hexadecimal input`` Public point.  
+
+``['publicKeyToAddress'       or 'Ka'] [a]``  
+> Compute the address that is represented by the given public key. This is the number which, when encoded in base-58, is used to publicly identify this bitcoin wallet.  
+``[a]: Hexadecimal input`` Public key.  
+
+``['publicPointToAddress'     or 'pa'] [a]``  
+> Convenience function successively calling publicKeyToAddress [...] and publicPointToPublicKey [...]. See those for documentation.  
+``[a]: Hexadecimal input`` Public point.  
+
+``['privateKeyToPublicKey'    or 'kK'] [a] [b]``  
+> Convenience function successively calling publicPointToPublicKey [...] and privateKeyToPublicPoint [...]. See those for documentation.  
+``[a]: Hexadecimal input`` Private key.  
+``[b]: Boolean     input`` Point compressed?  
+
+``['privateKeyToAddress'      or 'ka'] [a] [b]``  
+> Convenience function successively calling publicKeyToAddress [...], publicPointToPublicKey [...], and privateKeyToPublicPoint [...]. See those for documentation.  
+``[a]: Hexadecimal input`` Private key.  
+``[b]: Boolean     input`` Point compressed?  
+
+``['generateRandom'           or 'gR'] [a]``  
+> Creates a new pseudorandomly-generated keypair.  
+``[a]: Boolean     input`` Point compressed?  
+
+``['generateFromHash'         or 'gH'] [a] [b]``  
+> Creates a keypair from the given hash value.  
+``[a]: Hexadecimal input`` Hash value, typically 256-bit.  
+``[b]: Boolean     input`` Point compressed?  
+
+``['generateFromStringSHA256' or 'gS'] [a] [b] [c]``  
+> Creates a keypair from the SHA-256 hash value of the given String.  
+``[a]: String      input`` String to be hashed. '\\s' will escape as a space character, '\\n' will escape as a newline character, and '\\t' will escape as a tab character. '\\\\' can be used to escape a backslash.  
+``[a]: String      input`` Charset of string to be hashed. Typically one of 'US-ASCII' or 'UTF-8'.  
+``[c]: Boolean     input`` Point compressed?  
+
+``['findVanityAddress'        or 'v' ] [a] [b]``  
+> Find a vanity Bitcoin address, which will start with the given String. This is done probabilistically, and can take enormous amounts of time and CPU for longer vanity Strings.  
+``[a]: Base-58     input`` Vanity string to search for.  
+``[b]: Boolean     input`` Point compressed?  
+
+``['encodeBase58'             or 'eB'] [a]``  
+> Convert the given hexadecimal value to base-58.  
+``[a]: Hexadecimal input`` Hexadecimal number to be converted to base-58.  
+
+``['encodeHex'                or 'eH'] [a]``  
+> Convert the given base-58 value to hexadecimal.  
+``[a]: Base-58     input`` Base-58 number to be converted to hexadecimal.  
+
+``['performTests'             or 't' ]``  
+> Perform a series of tests to make sure that IttyBittyBitcoin is functioning properly.  
+
+``['interactiveMode'          or 'i' ]``  
+> Toggle interactive mode, which allows IttyBittyBitcoin commands to be entered alone without retyping the path to the executable jar.  
+
+``['help'                     or '?' ]``  
+> Display this help screen.  
 
 Notes
 ------------
