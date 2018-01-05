@@ -22,14 +22,10 @@
 
 package com.therealergo.ittybittybitcoin;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.security.InvalidAlgorithmParameterException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.security.Security;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Random;
 
 import javax.xml.bind.DatatypeConverter;
@@ -103,7 +99,7 @@ public class IttyBittyBitcoin {
 	}
 	
 	/** Perform a series of tests to check that all IttyBittyBitcoin functions are working as intended. Test log is returned as a String. */
-	public static String performTests() throws NoSuchAlgorithmException, UnsupportedEncodingException, NoSuchProviderException, InvalidAlgorithmParameterException, InvalidKeySpecException {
+	public static String performTests() {
 		String results = "";
 		results = results + performTest(encodeHex(decodeHex("000000")), "000000", "Hexadecimal encode/decode");
 		results = results + performTest(encodeBase58(decodeBase58("1111111111111111111114oLvT2")), "1111111111111111111114oLvT2", "Base-58 encode/decode");
@@ -290,7 +286,7 @@ public class IttyBittyBitcoin {
 	}
 	
 	/** Find a vanity Bitcoin address, which will start with the given String 'vanity.' The private key that corresponds to the address will be returned. This is done probabilistically, and can take enormous amounts of time and CPU for longer vanity Strings. */
-	public static byte[] findVanityAddress(String vanity, boolean compressed) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidAlgorithmParameterException, InvalidKeySpecException {
+	public static byte[] findVanityAddress(String vanity, boolean compressed) {
 		// Check to see if the vanity string could actually be found at all
 		try {
 			decodeBase58(vanity);

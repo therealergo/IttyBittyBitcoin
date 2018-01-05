@@ -22,11 +22,8 @@
 
 package com.therealergo.ittybittybitcoin;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.spec.InvalidKeySpecException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,7 +40,7 @@ public class IttyBittyBitcoinCommandLine {
 	}
 	
 	/** Entry point for command-line mode of IttyBittyBitcoin. */
-	public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException, NoSuchProviderException, InvalidAlgorithmParameterException, InvalidKeySpecException {
+	public static void main(String[] args) throws IOException {
 		// Initialize variables for interactive mode, and enter interactive mode loop
 		boolean interactiveMode = false;
 		boolean startup = true;
