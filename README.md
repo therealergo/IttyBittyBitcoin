@@ -7,8 +7,8 @@ Command reference
 ------------
 
 ``['checksum'                 or 'c' ] [a]``  
-> ``    [a]: Hexadecimal input:`` Value to compute checksum of.  
-    Compute checksum of the given value, which is the last 4 bytes of the result of SHA-256 hashing the value twice.
+> Compute checksum of the given value, which is the last 4 bytes of the result of SHA-256 hashing the value twice.  
+``    [a]: Hexadecimal input`` Value to compute checksum of.  
 
 
 	['privateKeyToPublicPoint'  or 'kp'] [a] [b]
