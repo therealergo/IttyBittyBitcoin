@@ -53,7 +53,7 @@ Command reference
 <pre>['generateFromStringSHA256' or 'gS'] [a] [b] [c]</pre>  
 > Creates a keypair from the SHA-256 hash value of the given String.  
 ``[a]: String      input`` String to be hashed. '\\s' will escape as a space character, '\\n' will escape as a newline character, and '\\t' will escape as a tab character. '\\\\' can be used to escape a backslash.  
-``[a]: String      input`` Charset of string to be hashed. Typically one of 'US-ASCII' or 'UTF-8'.  
+``[b]: String      input`` Charset of string to be hashed. Typically one of 'US-ASCII' or 'UTF-8'.  
 ``[c]: Boolean     input`` Point compressed?  
 
 <pre>['findVanityAddress'        or 'v' ] [a] [b]</pre>  
