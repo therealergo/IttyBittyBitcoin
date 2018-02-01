@@ -41,7 +41,7 @@ import org.bouncycastle.util.Arrays;
 
 public class IttyBittyBitcoin {
 	/** The installed version of IttyBittyBitcoin. */
-	public static final String version = "1.0AR";
+	public static final String version = "1.0BR";
 	
 	/** Array where every position's index is mapped to the base-58 encoded character representing that index. */
 	private static final char[] base58ToChar = new char[] {
@@ -61,17 +61,17 @@ public class IttyBittyBitcoin {
 	};
 	
 	/** The MessageDigest instance used for SHA-256 hashing. */
-	private static MessageDigest   messageDigestSHA256;
+	private MessageDigest   messageDigestSHA256;
 	/** The RIPEMD160Digest instance used for RMD-160 hashing. */
-	private static RIPEMD160Digest messageDigestRMD160;
+	private RIPEMD160Digest messageDigestRMD160;
 	
 	/** The Bouncy Castle instance representing the secp256k1 curve that Bitcoin uses to encrypt private keys. */
-	private static X9ECParameters curve;
+	private X9ECParameters curve;
 	/** The domain instance holding the prespecified parameters to the secp256k1 curve. */
-	private static ECDomainParameters domain;
+	private ECDomainParameters domain;
 	
-	/** Static block used to initialize the Bouncy Castle and Java Security instances used by IttyBittyBitcoin. */
-	static {
+	/** Constructor used to initialize the Bouncy Castle and Java Security instances used by IttyBittyBitcoin. */
+	public IttyBittyBitcoin() {
 		// Add Bouncy Castle's security provider once at startup
 		Security.addProvider(new BouncyCastleProvider());
 		
@@ -90,7 +90,7 @@ public class IttyBittyBitcoin {
 	}
 	
 	/** Test if the given String 'a' matches String 'b,' returning a human readable test result with String name 't.' */
-	private static String performTest(String a, String b, String t) {
+	private String performTest(String a, String b, String t) {
 		if (a.equals(b)) {
 			return "<" + t + ">\n -- PASS: " + a + " == " + b + "\n";
 		} else {
@@ -99,7 +99,7 @@ public class IttyBittyBitcoin {
 	}
 	
 	/** Perform a series of tests to check that all IttyBittyBitcoin functions are working as intended. Test log is returned as a String. */
-	public static String performTests() {
+	public String performTests() {
 		String results = "";
 		results = results + performTest(encodeHex(decodeHex("000000")), "000000", "Hexadecimal encode/decode");
 		results = results + performTest(encodeBase58(decodeBase58("1111111111111111111114oLvT2")), "1111111111111111111114oLvT2", "Base-58 encode/decode");
@@ -116,17 +116,17 @@ public class IttyBittyBitcoin {
 	}
 
 	/** Convert the given unsigned base-2 number, stored as an array of bytes, into a hexadecimal string. Any 0-padding on the left of the hexadecimal string is preserved. */
-	public static String encodeHex(byte[] value) {
+	public String encodeHex(byte[] value) {
 		return DatatypeConverter.printHexBinary(value);
 	}
 	
 	/** Convert the given hexadecimal string to an unsigned base-2 number stored as an array of bytes. Any 0-padding on the left of the hexadecimal string is preserved. */
-	public static byte[] decodeHex(String hexString) {
+	public byte[] decodeHex(String hexString) {
 		return DatatypeConverter.parseHexBinary(hexString);
 	}
 	
 	/** Converts the given value, an unsigned base-2 array of bytes, to a base-58 value. Any 1-padding on the left of the base-58 string is preserved. */
-	public static String encodeBase58(byte[] value) {
+	public String encodeBase58(byte[] value) {
 		// Convert value to two's complement for the BigInteger constructor, by appending a sign byte of 0x00
 		byte[] valueIn = new byte[value.length + 1];
 		valueIn[0] = 0;
@@ -150,7 +150,7 @@ public class IttyBittyBitcoin {
 	}
 	
 	/** Converts the given base-58 value to a an unsigned base-2 array of bytes. Any 1-padding on the left of the base-58 string is preserved. */
-	public static byte[] decodeBase58(String base58String) {
+	public byte[] decodeBase58(String base58String) {
 		BigInteger integerValue = BigInteger.ZERO;
 		for (int i = 0; i<base58String.length(); i++) {
 			int characterAsciiValue = (int)base58String.charAt(i);
@@ -185,12 +185,12 @@ public class IttyBittyBitcoin {
 	}
 	
 	/** Compute the SHA-256 hash of the given value. */
-	public static byte[] hashSHA256(byte[] value) {
+	public byte[] hashSHA256(byte[] value) {
 		return messageDigestSHA256.digest(value);
 	}
 	
 	/** Compute checksum of the given value, which is the last 4 bytes of the result of SHA-256 hashing the value twice. */
-	public static byte[] checksum(byte[] value) {
+	public byte[] checksum(byte[] value) {
 		// Perform SHA-256 hash on value twice
 		byte[] doubleSHA256 = 
 				messageDigestSHA256.digest(
@@ -205,7 +205,7 @@ public class IttyBittyBitcoin {
 	}
 	
 	/** Compute the public point that this private key represents. This point is used to compute the public key and address. */
-	public static byte[] privateKeyToPublicPoint(byte[] privateKey, boolean compressed) {
+	public byte[] privateKeyToPublicPoint(byte[] privateKey, boolean compressed) {
 		// Convert privateKey to two's complement for the BigInteger constructor, by appending a sign byte of 0x00
 		byte[] privateKeyIn = new byte[privateKey.length + 1];
 		privateKeyIn[0] = 0;
@@ -222,7 +222,7 @@ public class IttyBittyBitcoin {
 	}
 	
 	/** Compute the SHA-256 hash followed by the RIME MD-160 hash of the given value, turning the given public point into a public key. */
-	public static byte[] publicPointToPublicKey(byte[] value) {
+	public byte[] publicPointToPublicKey(byte[] value) {
 		// SHA-256 hash the value
 		byte[] sha256HashedValue = messageDigestSHA256.digest(value);
 		
@@ -236,7 +236,7 @@ public class IttyBittyBitcoin {
 	}
 	
 	/** Compute the address that is represented by the given public key. This is the number which, when encoded in base-58, is used to publicly identify this bitcoin wallet. */
-	public static byte[] publicKeyToAddress(byte[] value) {
+	public byte[] publicKeyToAddress(byte[] value) {
 		// Pre-check that the key is in the correct form
 		if (value.length != 20) {
 			throw new RuntimeException("Input value must be 20-byte (160-bit) to be converted to a public address.");
@@ -263,22 +263,22 @@ public class IttyBittyBitcoin {
 	}
 	
 	/** Convenience function successively calling publicKeyToAddress(...) and publicPointToPublicKey(...). See those for documentation. */
-	public static byte[] publicPointToAddress(byte[] publicPoint) {
+	public byte[] publicPointToAddress(byte[] publicPoint) {
 		return publicKeyToAddress(publicPointToPublicKey(publicPoint));
 	}
 	
 	/** Convenience function successively calling publicPointToPublicKey(...) and privateKeyToPublicPoint(...). See those for documentation. */
-	public static byte[] privateKeyToPublicKey(byte[] privateKey, boolean compressed) {
+	public byte[] privateKeyToPublicKey(byte[] privateKey, boolean compressed) {
 		return publicPointToPublicKey(privateKeyToPublicPoint(privateKey, compressed));
 	}
 	
 	/** Convenience function successively calling publicKeyToAddress(...), publicPointToPublicKey(...), and privateKeyToPublicPoint(...). See those for documentation. */
-	public static byte[] privateKeyToAddress(byte[] privateKey, boolean compressed) {
+	public byte[] privateKeyToAddress(byte[] privateKey, boolean compressed) {
 		return publicKeyToAddress(publicPointToPublicKey(privateKeyToPublicPoint(privateKey, compressed)));
 	}
 	
 	/** Returns a new pseudorandomly-generated private key. */
-	public static byte[] generateRandomPrivateKey() {
+	public byte[] generateRandomPrivateKey() {
 		Random random = new Random();
 		byte[] randomBytes = new byte[8];
 		random.nextBytes(randomBytes);
@@ -286,7 +286,7 @@ public class IttyBittyBitcoin {
 	}
 	
 	/** Find a vanity Bitcoin address, which will start with the given String 'vanity.' The private key that corresponds to the address will be returned. This is done probabilistically, and can take enormous amounts of time and CPU for longer vanity Strings. */
-	public static byte[] findVanityAddress(String vanity, boolean compressed) {
+	public byte[] findVanityAddress(String vanity, boolean compressed) {
 		// Check to see if the vanity string could actually be found at all
 		try {
 			decodeBase58(vanity);

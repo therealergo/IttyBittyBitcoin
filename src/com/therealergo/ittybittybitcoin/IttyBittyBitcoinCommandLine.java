@@ -38,8 +38,11 @@ public class IttyBittyBitcoinCommandLine {
 		throw new RuntimeException("Unrecognized boolean input: '" + value + "'.");
 	}
 	
-	/** Entry point for command-line mode of IttyBittyBitcoin. */
+	/** Entry point for command-line mode of ibb. */
 	public static void main(String[] args) {
+		// Create IttyBittyBitcoin instance to send commands to
+		IttyBittyBitcoin ibb = new IttyBittyBitcoin();
+		
 		// Initialize variables for interactive mode, and enter interactive mode loop
 		boolean interactiveMode = false;
 		boolean startup = true;
@@ -56,50 +59,50 @@ public class IttyBittyBitcoinCommandLine {
 					
 					// Perform each command if applicable
 					if (args.length == 2 && (args[0].equals("checksum") || args[0].equals("-"))) {
-						System.out.println("Computed checksum: " + IttyBittyBitcoin.encodeHex(IttyBittyBitcoin.checksum(IttyBittyBitcoin.decodeHex(args[1]))));
+						System.out.println("Computed checksum: " + ibb.encodeHex(ibb.checksum(ibb.decodeHex(args[1]))));
 					} else if (args.length == 3 && (args[0].equals("privateKeyToPublicPoint") || args[0].equals("kp"))) {
-						System.out.println("Public point: " + IttyBittyBitcoin.encodeHex(IttyBittyBitcoin.privateKeyToPublicPoint(IttyBittyBitcoin.decodeHex(args[1]), decodeBoolean(args[2]))));
+						System.out.println("Public point: " + ibb.encodeHex(ibb.privateKeyToPublicPoint(ibb.decodeHex(args[1]), decodeBoolean(args[2]))));
 					} else if (args.length == 2 && (args[0].equals("publicPointToPublicKey") || args[0].equals("pK"))) {
-						System.out.println("Public key: " + IttyBittyBitcoin.encodeHex(IttyBittyBitcoin.publicPointToPublicKey(IttyBittyBitcoin.decodeHex(args[1]))));
+						System.out.println("Public key: " + ibb.encodeHex(ibb.publicPointToPublicKey(ibb.decodeHex(args[1]))));
 					} else if (args.length == 2 && (args[0].equals("publicKeyToAddress") || args[0].equals("Ka"))) {
-						System.out.println("Address: " + IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.publicKeyToAddress(IttyBittyBitcoin.decodeHex(args[1]))));
+						System.out.println("Address: " + ibb.encodeBase58(ibb.publicKeyToAddress(ibb.decodeHex(args[1]))));
 					} else if (args.length == 2 && (args[0].equals("publicPointToAddress") || args[0].equals("pa"))) {
-						System.out.println(IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.publicPointToAddress(IttyBittyBitcoin.decodeHex(args[1]))));
+						System.out.println(ibb.encodeBase58(ibb.publicPointToAddress(ibb.decodeHex(args[1]))));
 					} else if (args.length == 3 && (args[0].equals("privateKeyToPublicKey") || args[0].equals("kK"))) {
-						System.out.println("Public key: " + IttyBittyBitcoin.encodeHex(IttyBittyBitcoin.privateKeyToPublicKey(IttyBittyBitcoin.decodeHex(args[1]), decodeBoolean(args[2]))));
+						System.out.println("Public key: " + ibb.encodeHex(ibb.privateKeyToPublicKey(ibb.decodeHex(args[1]), decodeBoolean(args[2]))));
 					} else if (args.length == 3 && (args[0].equals("privateKeyToAddress") || args[0].equals("ka"))) {
-						System.out.println("Address: " + IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.privateKeyToAddress(IttyBittyBitcoin.decodeHex(args[1]), decodeBoolean(args[2]))));
+						System.out.println("Address: " + ibb.encodeBase58(ibb.privateKeyToAddress(ibb.decodeHex(args[1]), decodeBoolean(args[2]))));
 					} else if (args.length == 2 && (args[0].equals("generateRandom") || args[0].equals("gR"))) {
 						System.out.println("Generating random keyset...");
-						byte[] privateKey = IttyBittyBitcoin.generateRandomPrivateKey();
-						System.out.println("Generated private key: " + IttyBittyBitcoin.encodeHex(privateKey));
-						System.out.println("Generated key's address: " + IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.privateKeyToAddress(privateKey, decodeBoolean(args[1]))));
+						byte[] privateKey = ibb.generateRandomPrivateKey();
+						System.out.println("Generated private key: " + ibb.encodeHex(privateKey));
+						System.out.println("Generated key's address: " + ibb.encodeBase58(ibb.privateKeyToAddress(privateKey, decodeBoolean(args[1]))));
 					} else if (args.length == 3 && (args[0].equals("generateFromHash") || args[0].equals("gH"))) {
 						System.out.println("Generating keyset from hash...");
-						byte[] privateKey = IttyBittyBitcoin.decodeHex(args[1]);
-						System.out.println("Generated private key: " + IttyBittyBitcoin.encodeHex(privateKey));
-						System.out.println("Generated key's address: " + IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.privateKeyToAddress(privateKey, decodeBoolean(args[2]))));
+						byte[] privateKey = ibb.decodeHex(args[1]);
+						System.out.println("Generated private key: " + ibb.encodeHex(privateKey));
+						System.out.println("Generated key's address: " + ibb.encodeBase58(ibb.privateKeyToAddress(privateKey, decodeBoolean(args[2]))));
 					} else if (args.length == 4 && (args[0].equals("generateFromStringSHA256") || args[0].equals("gS"))) {
 						System.out.println("Generating keyset from SHA-256 hashed String...");
 						try {
-							byte[] privateKey = IttyBittyBitcoin.hashSHA256(args[1].replace("\\n", "\n").replace("\\t", "\t").replace("\\s", " ").replace("\\\\", "\\").getBytes(args[2]));
-							System.out.println("Generated private key: " + IttyBittyBitcoin.encodeHex(privateKey));
-							System.out.println("Generated key's address: " + IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.privateKeyToAddress(privateKey, decodeBoolean(args[3]))));
+							byte[] privateKey = ibb.hashSHA256(args[1].replace("\\n", "\n").replace("\\t", "\t").replace("\\s", " ").replace("\\\\", "\\").getBytes(args[2]));
+							System.out.println("Generated private key: " + ibb.encodeHex(privateKey));
+							System.out.println("Generated key's address: " + ibb.encodeBase58(ibb.privateKeyToAddress(privateKey, decodeBoolean(args[3]))));
 						} catch (UnsupportedEncodingException e) { throw new RuntimeException("Unsupported Encoding!", e); }
 					} else if (args.length == 3 && (args[0].equals("findVanityAddress") || args[0].equals("v"))) {
 						System.out.println("Searching for vanity address...");
-						byte[] privateVanity = IttyBittyBitcoin.findVanityAddress(args[1], decodeBoolean(args[2]));
+						byte[] privateVanity = ibb.findVanityAddress(args[1], decodeBoolean(args[2]));
 						System.out.println("Vanity address found!");
-						System.out.println("Vanity address private key: " + IttyBittyBitcoin.encodeHex(privateVanity));
-						System.out.println("Vanity address: " + IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.privateKeyToAddress(privateVanity, decodeBoolean(args[2]))));
+						System.out.println("Vanity address private key: " + ibb.encodeHex(privateVanity));
+						System.out.println("Vanity address: " + ibb.encodeBase58(ibb.privateKeyToAddress(privateVanity, decodeBoolean(args[2]))));
 					} else if (args.length == 2 && (args[0].equals("encodeBase58") || args[0].equals("eB"))) {
-						System.out.println("Base-58 encoded value: " + IttyBittyBitcoin.encodeBase58(IttyBittyBitcoin.decodeHex(args[1])));
+						System.out.println("Base-58 encoded value: " + ibb.encodeBase58(ibb.decodeHex(args[1])));
 					} else if (args.length == 2 && (args[0].equals("encodeHex") || args[0].equals("eH"))) {
-						System.out.println("Hexadecimal encoded value: " + IttyBittyBitcoin.encodeHex(IttyBittyBitcoin.decodeBase58(args[1])));
+						System.out.println("Hexadecimal encoded value: " + ibb.encodeHex(ibb.decodeBase58(args[1])));
 					} else if (args.length == 1 && (args[0].equals("version") || args[0].equals("V"))) {
 						System.out.println("Current IttyBittyBitcoin version: V" + IttyBittyBitcoin.version + ".");
 					} else if (args.length == 1 && (args[0].equals("performTests") || args[0].equals("t"))) {
-						System.out.println(IttyBittyBitcoin.performTests());
+						System.out.println(ibb.performTests());
 					} else if (args.length == 1 && (args[0].equals("interactiveMode") || args[0].equals("i"))) {
 						System.out.println(interactiveMode ? "Leaving interactive mode. Goodbye!" : "Entering interactive mode. Welcome!");
 						interactiveMode = !interactiveMode;
