@@ -1,7 +1,11 @@
 IttyBittyBitcoin
 ------------
 
-IttyBittyBitcoin is a set of free open-source cross-platform Java tools for working with bitcoin addresses. It can either be used as a library or run from the command line. It is MIT-licensed, and its only dependency is the BouncyCastle crypto library.
+IttyBittyBitcoin is a set of free open-source cross-platform Java tools for working with bitcoin addresses. It allows for tinkering with every step of the address-creation process, so it's perfect for testing the different layers of Bitcoin's encryption. It can either be used as a library or run from the command line, and it is MIT-licensed. This means that you can use it anywhere for anything. IttyBittyBitcoin's only dependency is the BouncyCastle crypto library, which is used for some hashing.  
+
+IttyBittyBitcoin also allows easy vanity address generation. Neat!  
+
+The IttyBittyBitcoin website can be found [here](http://www.therealergo.com/pages/ittybittybitcoin/index.html).  
 
 Command reference
 ------------
